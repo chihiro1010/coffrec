@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { stop, start, setcalcTime, setdisplayTime } from "../reducer/dripSlice";
 import { useSelector } from "../reducer/store";
 import { useEffect } from "react";
+import timerImg from "../assets/timer.png";
 
 const DripTimer: React.FC = () => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const DripTimer: React.FC = () => {
     <>
       <div className="inline-block my-1">
         <img
-          src="src/assets/timer.png"
+          src={timerImg}
           alt="時計のアイコン"
           className="inline-block h-10 w-10"
         />

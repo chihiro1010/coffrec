@@ -1,4 +1,10 @@
 import DripTimer from "./DripTimer";
+import coffeeBeanImg from "../assets/coffee_bean.png";
+import particleSizeImg from "../assets/particle_size.png";
+import scalesImg from "../assets/scales.png";
+import waterImg from "../assets/water.png";
+import thermometerImg from "../assets/thermometer.png";
+import memoImg from "../assets/memo.png";
 
 const Modal: React.FC = () => {
   return (
@@ -6,7 +12,7 @@ const Modal: React.FC = () => {
       <div className="p-4">
         <div className="my-7">
           <img
-            src="src/assets/coffee_bean.png"
+            src={coffeeBeanImg}
             alt="豆のアイコン"
             className="inline-block h-10 w-10"
           />
@@ -18,7 +24,7 @@ const Modal: React.FC = () => {
         </div>
         <div className="my-7">
           <img
-            src="src/assets/particle_size.png"
+            src={particleSizeImg}
             alt="挽目のアイコン"
             className="inline-block h-10 w-10"
           />
@@ -38,7 +44,7 @@ const Modal: React.FC = () => {
         </div>
         <div className="my-7">
           <img
-            src="src/assets/scales.png"
+            src={scalesImg}
             alt="秤のアイコン"
             className="inline-block h-10 w-10"
           />
@@ -53,7 +59,7 @@ const Modal: React.FC = () => {
         </div>
         <div className="my-7">
           <img
-            src="src/assets/water.png"
+            src={waterImg}
             alt="ビーカーのアイコン"
             className="inline-block h-10 w-10"
           />
@@ -68,7 +74,7 @@ const Modal: React.FC = () => {
         </div>
         <div className="my-7">
           <img
-            src="src/assets/thermometer.png"
+            src={thermometerImg}
             alt="温度計のアイコン"
             className="inline-block h-10 w-10"
           />
@@ -84,7 +90,7 @@ const Modal: React.FC = () => {
         <DripTimer />
         <div className="my-7">
           <img
-            src="src/assets/memo.png"
+            src={memoImg}
             alt="メモのアイコン"
             className="inline-block h-10 w-10 align-top"
           />

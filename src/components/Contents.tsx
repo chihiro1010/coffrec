@@ -1,3 +1,5 @@
+import dripImage from "../assets/home.png";
+
 const Contents: React.FC = () => {
   return (
     <>
@@ -12,7 +14,7 @@ const Contents: React.FC = () => {
       <div className="flex flex-col items-center mt-5">
         <div className="w-[22rem] h-20 my-1  bg-white  ">
           <img
-            src="src/assets/home.png"
+            src={dripImage}
             alt="抽出アイコン"
             className="inline-block h-14 w-13 my-3 mx-3"
           />
@@ -22,7 +24,7 @@ const Contents: React.FC = () => {
         </div>
         <div className="w-[22rem] h-20 my-1  bg-white  ">
           <img
-            src="src/assets/home.png"
+            src={dripImage}
             alt="抽出アイコン"
             className="inline-block h-14 w-13 my-3 mx-3"
           />
@@ -32,7 +34,7 @@ const Contents: React.FC = () => {
         </div>
         <div className="w-[22rem] h-20 my-1  bg-white  ">
           <img
-            src="src/assets/home.png"
+            src={dripImage}
             alt="抽出アイコン"
             className="inline-block h-14 w-13 my-3 mx-3"
           />

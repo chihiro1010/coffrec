@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { display, hidden } from "../reducer/modalSlice";
 import { reset } from "../reducer/dripSlice";
 import { useSelector } from "../reducer/store";
+import saveImg from "../assets/save.png";
 
 const ModalButton: React.FC = () => {
   const dispatch = useDispatch();
@@ -41,8 +42,8 @@ const ModalButton: React.FC = () => {
           >
             <a className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#d2b5a7] text-5xl flex justify-center">
               <img
-                src="src/assets/save.png"
-                alt="ポットのアイコン"
+                src={saveImg}
+                alt="セーブアイコン"
                 className="inline-block h-7 w-7 mt-[0.9rem]"
               />
             </a>

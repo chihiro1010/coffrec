@@ -1,5 +1,10 @@
 import { useDispatch } from "react-redux";
-import { stop, start, setcalcTime, setdisplayTime } from "../reducer/dripSlice";
+import {
+  stopTimer,
+  startTimer,
+  setcalcTime,
+  setdisplayTime,
+} from "../reducer/dripSlice";
 import { useSelector } from "../reducer/store";
 import { useEffect } from "react";
 import timerImg from "../assets/timer.png";
@@ -11,15 +16,14 @@ const DripTimer: React.FC = () => {
   const displayTime = useSelector((state) => state.drip.displayTime);
 
   useEffect(() => {
-    let timerInterval: number | undefined = undefined;
+    let timerId: number | undefined = undefined;
+
     if (dripState) {
-      timerInterval = setInterval(() => {
+      timerId = setInterval(() => {
         dispatch(setcalcTime());
       }, 1000);
     }
-    return () => {
-      clearInterval(timerInterval);
-    };
+    return () => clearInterval(timerId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dripState]);
 
@@ -39,14 +43,14 @@ const DripTimer: React.FC = () => {
         {dripState ? (
           <button
             className="inline-block text-white bg-[#C8A99C] rounded-3xl drop-shadow-md w-28 py-2 ml-3"
-            onClick={() => dispatch(stop())}
+            onClick={() => dispatch(stopTimer())}
           >
             II 抽出停止
           </button>
         ) : (
           <button
             className="inline-block text-white bg-[#C8A99C] rounded-3xl drop-shadow-md w-28 py-2 ml-3"
-            onClick={() => dispatch(start())}
+            onClick={() => dispatch(startTimer())}
           >
             ▶ 抽出開始
           </button>

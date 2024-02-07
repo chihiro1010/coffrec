@@ -11,11 +11,11 @@ export const dripSlice = createSlice({
   name: "drip",
   initialState,
   reducers: {
-    start: (state) => {
+    startTimer: (state) => {
       state.dripping = true;
       state.startTime = Date.now() - state.calcTime;
     },
-    stop: (state) => {
+    stopTimer: (state) => {
       state.dripping = false;
     },
     setcalcTime: (state) => {
@@ -36,5 +36,5 @@ export const dripSlice = createSlice({
   },
 });
 
-export const { start, stop, setcalcTime, setdisplayTime, reset } =
+export const { startTimer, stopTimer, setcalcTime, setdisplayTime, reset } =
   dripSlice.actions;

@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
-import { dripSlice } from "./dripSlice";
+import { dripTimerSlice } from "./dripTimerSlice";
 import { modalSlice } from "./modalSlice";
+import { dripDataSlice } from "./dripDataSlice";
 
 export const rootReducer = combineReducers({
-  drip: dripSlice.reducer,
+  dripTimer: dripTimerSlice.reducer,
+  dripData: dripDataSlice.reducer,
   modal: modalSlice.reducer,
 });

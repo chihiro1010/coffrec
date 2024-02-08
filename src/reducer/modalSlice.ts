@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isDisplayed: false,
+  registed: false,
 };
 
 export const modalSlice = createSlice({

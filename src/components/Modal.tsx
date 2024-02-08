@@ -6,147 +6,171 @@ import waterImg from "../assets/water.png";
 import thermometerImg from "../assets/thermometer.png";
 import memoImg from "../assets/memo.png";
 import { useSelector } from "../reducer/store";
-import { useState } from "react";
+import {
+  updateBeanBrand,
+  updateGrinding,
+  updateBeanScales,
+  updateWaterScales,
+  updateCelsius,
+  updateMemo,
+} from "../reducer/dripDataSlice";
+import { useDispatch } from "react-redux";
 
 const Modal: React.FC = () => {
-  const dripTimes = useSelector((state) => state.drip.displayTime);
-  const [beanBrandState, setBeanBrandState] = useState("");
-  const [grindingState, setGrindingState] = useState("unknown");
-  const [beanScalesState, setBeanScalesState] = useState("");
-  const [waterScalesState, setWaterScalesState] = useState("");
-  const [thermometerState, setThermometerState] = useState("");
-  const [memoState, setMemoState] = useState("");
-  const [counterMemoLengthState, setCounterMemoLengthState] = useState(0);
+  const dispatch = useDispatch();
 
-  const changedTextarea = (value: string) => {
-    setMemoState(value);
-    setCounterMemoLengthState(value.length);
-  };
+  const registState = useSelector((state) => state.modal.registed);
+
+  const beanBrandState = useSelector((state) => state.dripData.beanBrand);
+  const grindingState = useSelector((state) => state.dripData.grinding);
+  const beanScalesState = useSelector((state) => state.dripData.beanScales);
+  const waterScalesState = useSelector((state) => state.dripData.waterScales);
+  const celsiusState = useSelector((state) => state.dripData.celsius);
+  const memoState = useSelector((state) => state.dripData.memo);
+
+  const memoLengthState = useSelector(
+    (state) => state.dripData.countMemoLength
+  );
 
   return (
     <div className="fixed top-0 bg-white rounded-t-2xl shadow-lg w-screen h-screen">
-      <div className="p-4">
-        値確認用 --------------------
-        <br />
-        {dripTimes}
-        <br />
-        {beanBrandState}
-        <br />
-        {grindingState}
-        <br />
-        {beanScalesState}
-        <br />
-        {waterScalesState}
-        <br />
-        {thermometerState}
-        <br />
-        {memoState}
-        -----------------------------
-        <div className="my-7">
-          <img
-            src={coffeeBeanImg}
-            alt="豆のアイコン"
-            className="inline-block h-10 w-10"
-          />
-          <input
-            type="text"
-            value={beanBrandState}
-            onChange={(e) => setBeanBrandState(e.target.value)}
-            placeholder="豆の銘柄を記入"
-            className="rounded-md drop-shadow-md w-64 p-2 ml-3"
-          />
-        </div>
-        <div className="my-7">
-          <img
-            src={particleSizeImg}
-            alt="挽目のアイコン"
-            className="inline-block h-10 w-10"
-          />
-          <select
-            name="grinding"
-            className="rounded-md drop-shadow-md p-2 ml-3"
-            value={grindingState}
-            onChange={(e) => setGrindingState(e.target.value)}
-          >
-            <option value="unknown">挽目を選択</option>
-            <option value="very-finely">極細挽き</option>
-            <option value="finely">細挽き</option>
-            <option value="finely-medium">中細挽き</option>
-            <option value="medium">中挽き</option>
-            <option value="medium-coarsely">中粗挽き</option>
-            <option value="coarsely">粗挽き</option>
-            <option value="very-coarsely">極粗挽き</option>
-          </select>
-        </div>
-        <div className="my-7">
-          <img
-            src={scalesImg}
-            alt="秤のアイコン"
-            className="inline-block h-10 w-10"
-          />
-          <input
-            type="text"
-            value={beanScalesState}
-            onChange={(e) => setBeanScalesState(e.target.value)}
-            placeholder="粉量を記入"
-            className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
-          />
-          <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
-            g
+      <div className="flex justify-center">
+        <div className="p-4">
+          <div className="my-7">
+            <img
+              src={coffeeBeanImg}
+              alt="豆のアイコン"
+              className="inline-block h-10 w-10"
+            />
+            <input
+              type="text"
+              value={beanBrandState}
+              onChange={(e) => dispatch(updateBeanBrand(e.target.value))}
+              maxLength={30}
+              placeholder="豆の銘柄を記入"
+              className="rounded-md drop-shadow-md w-64 p-2 ml-3"
+            />
           </div>
-        </div>
-        <div className="my-7">
-          <img
-            src={waterImg}
-            alt="ビーカーのアイコン"
-            className="inline-block h-10 w-10"
-          />
-          <input
-            type="text"
-            value={waterScalesState}
-            onChange={(e) => setWaterScalesState(e.target.value)}
-            placeholder="湯量を記入"
-            className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
-          />
-          <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
-            ml
+          <div className="my-7">
+            <img
+              src={particleSizeImg}
+              alt="挽目のアイコン"
+              className="inline-block h-10 w-10"
+            />
+            <select
+              name="grinding"
+              className="rounded-md drop-shadow-md p-2 ml-3"
+              value={grindingState}
+              onChange={(e) => dispatch(updateGrinding(e.target.value))}
+            >
+              <option value="unknown">挽目を選択</option>
+              <option value="very-finely">極細挽き</option>
+              <option value="finely">細挽き</option>
+              <option value="finely-medium">中細挽き</option>
+              <option value="medium">中挽き</option>
+              <option value="medium-coarsely">中粗挽き</option>
+              <option value="coarsely">粗挽き</option>
+              <option value="very-coarsely">極粗挽き</option>
+            </select>
           </div>
-        </div>
-        <div className="my-7">
-          <img
-            src={thermometerImg}
-            alt="温度計のアイコン"
-            className="inline-block h-10 w-10"
-          />
-          <input
-            type="text"
-            value={thermometerState}
-            onChange={(e) => setThermometerState(e.target.value)}
-            placeholder="湯温を記入"
-            className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
-          />
-          <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
-            ℃
+          <div className="my-7">
+            <img
+              src={scalesImg}
+              alt="秤のアイコン"
+              className="inline-block h-10 w-10"
+            />
+            <input
+              type="number"
+              step="1"
+              min="0"
+              max="99"
+              pattern="[0-9]"
+              value={beanScalesState === 0 ? "" : beanScalesState}
+              onChange={(e) =>
+                dispatch(updateBeanScales(e.target.valueAsNumber))
+              }
+              placeholder="粉量を記入"
+              className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
+            />
+            <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
+              g
+            </div>
           </div>
-        </div>
-        <DripTimer />
-        <div className="my-7">
-          <img
-            src={memoImg}
-            alt="メモのアイコン"
-            className="inline-block h-10 w-10 align-top"
-          />
-          <textarea
-            className="rounded-l-md drop-shadow-md p-2 ml-3 w-64 h-40"
-            value={memoState}
-            maxLength={1000}
-            onChange={(e) => changedTextarea(e.target.value)}
-          ></textarea>
-          <p className="ml-14 text-sm font-bold text-[#C8A99C]">
-            {counterMemoLengthState} 文字（ 最大1000文字 ）
-          </p>
+          <div className="my-7">
+            <img
+              src={waterImg}
+              alt="ビーカーのアイコン"
+              className="inline-block h-10 w-10"
+            />
+            <input
+              type="number"
+              step="10"
+              min="0"
+              max="999"
+              pattern="[0-9]"
+              value={waterScalesState === 0 ? "" : waterScalesState}
+              onChange={(e) =>
+                dispatch(updateWaterScales(e.target.valueAsNumber))
+              }
+              placeholder="湯量を記入"
+              className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
+            />
+            <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
+              ml
+            </div>
+          </div>
+          <div className="my-7">
+            <img
+              src={thermometerImg}
+              alt="温度計のアイコン"
+              className="inline-block h-10 w-10"
+            />
+            <input
+              type="number"
+              step="1"
+              min="0"
+              max="100"
+              pattern="[0-9]"
+              value={celsiusState === 0 ? "" : celsiusState}
+              onChange={(e) => dispatch(updateCelsius(e.target.valueAsNumber))}
+              placeholder="湯温を記入"
+              className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
+            />
+            <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
+              ℃
+            </div>
+          </div>
+          <div className="my-7">
+            <img
+              src={memoImg}
+              alt="メモのアイコン"
+              className="inline-block h-10 w-10 align-top"
+            />
+            <textarea
+              className="rounded-l-md drop-shadow-md p-2 ml-3 w-64 h-40"
+              value={memoState}
+              maxLength={1000}
+              onChange={(e) => dispatch(updateMemo(e.target.value))}
+            ></textarea>
+            <p className="ml-14 text-sm font-bold text-[#C8A99C]">
+              {memoLengthState} 文字（ 最大1000文字 ）
+            </p>
+          </div>
+          <DripTimer />
         </div>
       </div>
+      {registState ? (
+        <div className="flex justify-end gap-x-2 p-4">
+          <button
+            type="button"
+            className="py-2 px-3 text-sm text-gray-600 font-semibold rounded-lg bg-white duration-75 hover:bg-gray-100"
+          >
+            OK
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

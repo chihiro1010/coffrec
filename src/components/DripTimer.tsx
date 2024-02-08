@@ -4,16 +4,16 @@ import {
   startTimer,
   setcalcTime,
   setdisplayTime,
-} from "../reducer/dripSlice";
+} from "../reducer/dripTimerSlice";
 import { useSelector } from "../reducer/store";
 import { useEffect } from "react";
 import timerImg from "../assets/timer.png";
 
 const DripTimer: React.FC = () => {
   const dispatch = useDispatch();
-  const dripState = useSelector((state) => state.drip.dripping);
-  const calcTime = useSelector((state) => state.drip.calcTime);
-  const displayTime = useSelector((state) => state.drip.displayTime);
+  const dripState = useSelector((state) => state.dripTimer.dripping);
+  const calcTime = useSelector((state) => state.dripTimer.calcTime);
+  const displayTime = useSelector((state) => state.dripTimer.displayTime);
 
   useEffect(() => {
     let timerId: number | undefined = undefined;

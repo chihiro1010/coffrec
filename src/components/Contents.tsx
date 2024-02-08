@@ -1,43 +1,66 @@
+import { useEffect } from "react";
 import DripItem from "./DripItem";
+import { useDispatch } from "react-redux";
+import { useSelector } from "../reducer/store";
+import { get } from "../reducer/dripDataSlice";
+
+interface DripItem {
+  createdDateTime: string;
+  dripTimes: string;
+  beanBrand: string;
+  grinding: string;
+  beanScales: number;
+  waterScales: number;
+  celsius: number;
+  memo: string;
+}
 
 const Contents: React.FC = () => {
-  const dummyJsonData = [
-    {
-      dateTime: "2024/2/1 16:19",
-      beanBrand: "エチオピア　ナチュラル",
-      grinding: "中細挽き",
-      beanScales: "16",
-      waterScales: "256",
-      thermometer: "87",
-      dripTimes: "03:20",
-      memo: "落ち切り",
-    },
-    {
-      dateTime: "2024/2/12 09:25",
-      beanBrand: "マンデリン　スマトラ",
-      grinding: "中細挽き",
-      beanScales: "16",
-      waterScales: "256",
-      thermometer: "87",
-      dripTimes: "03:20",
-      memo: "落ち切り",
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const dripDataList = useSelector<DripItem[]>(
+    (state) => state.dripData.retentionDataArgs
+  );
+
+  // const dummyJsonData = [
+  //   {
+  //     createdDateTime: "2024/2/1 16:19",
+  //     beanBrand: "エチオピア ナチュラル",
+  //     grinding: "中細挽き",
+  //     beanScales: 16,
+  //     waterScales: 256,
+  //     celsius: 87,
+  //     dripTimes: "03:20",
+  //     memo: "落ち切り",
+  //   },
+  //   {
+  //     createdDateTime: "2024/2/12 09:25",
+  //     beanBrand: "マンデリン スマトラ",
+  //     grinding: "中細挽き",
+  //     beanScales: 16,
+  //     waterScales: 256,
+  //     celsius: 87,
+  //     dripTimes: "03:20",
+  //     memo: "落ち切り",
+  //   },
+  // ];
+
+  useEffect(() => {
+    dispatch(get());
+  }, []);
 
   return (
     <>
-      {dummyJsonData.length !== 0 ? (
+      {dripDataList.length !== 0 ? (
         <div className="flex justify-center">
           <div className="mt-7 w-96">
-            ダミーデータ（まだ操作できません） -------------------------
-            {dummyJsonData.map((item) => (
+            {dripDataList.map((item) => (
               <DripItem
-                key={item.dateTime}
-                dateTime={item.dateTime}
+                key={item.createdDateTime}
+                dateTime={item.createdDateTime}
                 beanBrand={item.beanBrand}
               />
             ))}
-            -----------------------------------------------------------
           </div>
         </div>
       ) : (

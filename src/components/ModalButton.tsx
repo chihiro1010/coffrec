@@ -1,28 +1,18 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { display, hidden } from "../reducer/modalSlice";
-import { reset } from "../reducer/dripSlice";
+import { reset } from "../reducer/dripTimerSlice";
 import { useSelector } from "../reducer/store";
 import saveImg from "../assets/save.png";
+import { save } from "../reducer/dripDataSlice";
 
 const ModalButton: React.FC = () => {
   const dispatch = useDispatch();
   const displayModal = useSelector((state) => state.modal.isDisplayed);
-
-  switch (displayModal) {
-    case false:
-      return (
-        <button
-          className="fixed left-1/2 ml-[-2rem] bottom-8"
-          onClick={() => dispatch(display())}
-        >
-          <a className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#cdb5ab] text-5xl flex justify-center">
-            +
-          </a>
-        </button>
-      );
-    case true:
-      return (
+  const dripTime = useSelector((state) => state.dripTimer.displayTime);
+  return (
+    <>
+      {displayModal ? (
         <>
           <button
             className="fixed left-1/3 ml-[-2rem] bottom-8 z-10"
@@ -38,7 +28,11 @@ const ModalButton: React.FC = () => {
           <button
             className="fixed left-2/3 ml-[-2rem] bottom-8 z-10"
             // save
-            onClick={() => null}
+            onClick={() => {
+              dispatch(save(dripTime));
+              dispatch(hidden());
+              dispatch(reset());
+            }}
           >
             <a className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#d2b5a7] text-5xl flex justify-center">
               <img
@@ -49,10 +43,18 @@ const ModalButton: React.FC = () => {
             </a>
           </button>
         </>
-      );
-    default:
-      return null;
-  }
+      ) : (
+        <button
+          className="fixed left-1/2 ml-[-2rem] bottom-8"
+          onClick={() => dispatch(display())}
+        >
+          <a className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#cdb5ab] text-5xl flex justify-center">
+            +
+          </a>
+        </button>
+      )}
+    </>
+  );
 };
 
 export default ModalButton;

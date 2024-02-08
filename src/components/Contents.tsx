@@ -3,6 +3,7 @@ import DripItem from "./DripItem";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../reducer/store";
 import { get } from "../reducer/dripDataSlice";
+import homeLogoImg from "../assets/home.png";
 
 interface DripItem {
   createdDateTime: string;
@@ -66,11 +67,7 @@ const Contents: React.FC = () => {
       ) : (
         <div className="flex flex-col items-center h-screen justify-center mt-[-10vh]">
           <h1 className="text-[#8F8F8F] text-lg">最初の一杯を淹れましょう。</h1>
-          <img
-            className="w-20 x-20 mt-5"
-            src="src/assets/home.png"
-            alt="home-logo"
-          />
+          <img className="w-20 x-20 mt-5" src={homeLogoImg} alt="home-logo" />
         </div>
       )}
     </>

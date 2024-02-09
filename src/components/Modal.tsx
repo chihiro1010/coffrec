@@ -89,7 +89,7 @@ const Modal: React.FC = () => {
               onChange={(e) =>
                 dispatch(updateBeanScales(e.target.valueAsNumber))
               }
-              placeholder="粉量を記入"
+              placeholder="粉量を記入（最大99g）"
               className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
             />
             <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
@@ -112,7 +112,7 @@ const Modal: React.FC = () => {
               onChange={(e) =>
                 dispatch(updateWaterScales(e.target.valueAsNumber))
               }
-              placeholder="湯量を記入"
+              placeholder="湯量を記入（最大999ℓ）"
               className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
             />
             <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
@@ -133,7 +133,7 @@ const Modal: React.FC = () => {
               pattern="[0-9]"
               value={celsiusState === 0 ? "" : celsiusState}
               onChange={(e) => dispatch(updateCelsius(e.target.valueAsNumber))}
-              placeholder="湯温を記入"
+              placeholder="湯温を記入（最大100℃）"
               className="rounded-l-md drop-shadow-md w-28 p-2 ml-3"
             />
             <div className="inline-block bg-white py-2 px-3 rounded-r-md border-black drop-shadow-md">
@@ -147,13 +147,13 @@ const Modal: React.FC = () => {
               className="inline-block h-10 w-10 align-top"
             />
             <textarea
-              className="rounded-l-md drop-shadow-md p-2 ml-3 w-64 h-40"
+              className="rounded-l-m border-black drop-shadow-md p-2 ml-3 w-64 h-10 appearance-none"
               value={memoState}
               maxLength={1000}
               onChange={(e) => dispatch(updateMemo(e.target.value))}
             ></textarea>
             <p className="ml-14 text-sm font-bold text-[#C8A99C]">
-              {memoLengthState} 文字（ 最大1000文字 ）
+              {memoLengthState} / 1000
             </p>
           </div>
           <DripTimer />

@@ -52,9 +52,15 @@ const Contents: React.FC = () => {
 
   return (
     <>
+      {/* 注意書き用 */}
+      <div className="fixed top-1/2 text-lg left-1/2 ml-[-8rem] text-red-500 font-bold bg-white">
+        現状はデータ追加のみ可能です！
+      </div>
+      {/* ---------- */}
+
       {dripDataList.length !== 0 ? (
         <div className="flex justify-center">
-          <div className="mt-7 w-96">
+          <div className="mt-16 w-96">
             {dripDataList.map((item) => (
               <DripItem
                 key={item.createdDateTime}

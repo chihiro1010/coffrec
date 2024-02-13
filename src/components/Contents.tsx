@@ -5,17 +5,6 @@ import { useSelector } from "../reducer/store";
 import { get } from "../reducer/dripDataSlice";
 import homeLogoImg from "../assets/home.png";
 
-interface DripItem {
-  createdDateTime: string;
-  dripTimes: string;
-  beanBrand: string;
-  grinding: string;
-  beanScales: number;
-  waterScales: number;
-  celsius: number;
-  memo: string;
-}
-
 const Contents: React.FC = () => {
   const dispatch = useDispatch();
 

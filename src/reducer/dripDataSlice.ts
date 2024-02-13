@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: dripDataSlice = {
+const initialState: DripDataSlice = {
   retentionDataArgs: [],
-  registed: false,
   beanBrand: "",
   grinding: "unknown",
   beanScales: 0,
@@ -39,7 +38,17 @@ export const dripDataSlice = createSlice({
       state.countMemoLength = action.payload.length;
     },
     save: (state, action) => {
-      const getCurrentDatetime = () => {
+      const resetState = (prevState: DripDataSlice) => {
+        prevState.beanBrand = "";
+        prevState.grinding = "unknown";
+        prevState.beanScales = 0;
+        prevState.waterScales = 0;
+        prevState.celsius = 0;
+        prevState.memo = "";
+        prevState.countMemoLength = 0;
+      };
+
+      const getCurrentDatetime = (): string => {
         const now = new Date();
 
         const year = now.getFullYear();
@@ -49,7 +58,7 @@ export const dripDataSlice = createSlice({
         const minutes = String(now.getMinutes()).padStart(2, "0");
         const seconds = String(now.getSeconds()).padStart(2, "0");
 
-        const formattedTime = `${year}年${month}月${day}日 ${hours}:${minutes}:${seconds}`;
+        const formattedTime = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
         return formattedTime;
       };
 
@@ -64,15 +73,47 @@ export const dripDataSlice = createSlice({
         memo: state.memo,
       };
 
-      state.retentionDataArgs.push(registData);
-
-      localStorage.setItem("dripItem", JSON.stringify(state.retentionDataArgs));
-      state.registed = false;
+      try {
+        state.retentionDataArgs.push(registData);
+        localStorage.setItem(
+          "dripItem",
+          JSON.stringify(state.retentionDataArgs)
+        );
+        alert("ドリップデータを保存しました");
+        resetState(state);
+      } catch (error) {
+        alert("データの保存に失敗ました" + error);
+      }
     },
     get: (state) => {
-      const dataFromLocalStorage = localStorage.getItem("dripItem");
+      const dataFromLocalStorage: string | null =
+        localStorage.getItem("dripItem");
       if (dataFromLocalStorage) {
         state.retentionDataArgs = JSON.parse(dataFromLocalStorage);
+      }
+    },
+
+    remove: (state, action) => {
+      const result = window.confirm(
+        `『${action.payload.beanBrand}』の抽出データを削除してもよろしいですか？`
+      );
+
+      try {
+        if (result) {
+          const currentData: DripItem[] = [...state.retentionDataArgs];
+
+          state.retentionDataArgs = currentData.filter(
+            (data) => data.createdDateTime !== action.payload.dateTime
+          );
+
+          localStorage.setItem(
+            "dripItem",
+            JSON.stringify(state.retentionDataArgs)
+          );
+          alert("対象のデータを削除しました");
+        }
+      } catch (error) {
+        alert("対象データの削除に失敗しました" + error);
       }
     },
   },
@@ -87,4 +128,5 @@ export const {
   updateMemo,
   save,
   get,
+  remove,
 } = dripDataSlice.actions;

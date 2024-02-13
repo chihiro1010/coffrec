@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: ModalSlice = {
   isDisplayed: false,
-  registed: false,
+  modalState: "none",
 };
 
 export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    display: (state) => {
+    display: (state, action) => {
+      state.modalState = action.payload;
       state.isDisplayed = true;
     },
     hidden: (state) => {

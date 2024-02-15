@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <main className="h-screen w-screen">
+      <main>
         <Header />
         <ModalButton />
         <Contents />

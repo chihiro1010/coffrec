@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+const initialState: DripTimerSlice = {
   dripping: false,
   displayTime: "00:00",
   startTime: 0,
@@ -27,7 +27,7 @@ export const dripTimerSlice = createSlice({
       const s: string = String(currentTime.getSeconds()).padStart(2, "0");
       state.displayTime = `${m}:${s}`;
     },
-    reset: (state) => {
+    resetTimer: (state) => {
       state.dripping = false;
       state.displayTime = "00:00";
       state.startTime = 0;
@@ -36,5 +36,10 @@ export const dripTimerSlice = createSlice({
   },
 });
 
-export const { startTimer, stopTimer, setcalcTime, setdisplayTime, reset } =
-  dripTimerSlice.actions;
+export const {
+  startTimer,
+  stopTimer,
+  setcalcTime,
+  setdisplayTime,
+  resetTimer,
+} = dripTimerSlice.actions;

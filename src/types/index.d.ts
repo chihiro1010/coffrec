@@ -5,13 +5,15 @@ interface ModalSlice {
 
 interface DripDataSlice {
   retentionDataArgs: DripItem[];
-  beanBrand: string;
-  grinding: string;
-  beanScales: number;
-  waterScales: number;
-  celsius: number;
-  memo: string;
   countMemoLength: number;
+  dripItem: DripItem;
+}
+
+interface DripTimerSlice {
+  dripping: boolean;
+  displayTime: string;
+  startTime: number;
+  calcTime: number;
 }
 
 interface DripItem {
@@ -23,4 +25,9 @@ interface DripItem {
   waterScales: number;
   celsius: number;
   memo: string;
+}
+
+interface DripItemProps {
+  beanBrand?: string;
+  dripItem: DripItem;
 }

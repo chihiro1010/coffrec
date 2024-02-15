@@ -2,11 +2,11 @@ import siteLogoImg from "../assets/COFFREC.png";
 
 const Header: React.FC = () => {
   return (
-    <header className="text-center bg-white z-30">
+    <header className="sticky bg-white top-0 z-10 h-16">
       <img
-        className="fixed left-1/2 ml-[-4rem] top-8"
         src={siteLogoImg}
-        alt="site-logo"
+        alt="サイトロゴ"
+        className="absolute right-1/2 translate-x-1/2 bottom-1/2 translate-y-1/2"
       />
     </header>
   );

@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { display, hidden } from "../reducer/modalSlice";
+import { openModal, closeModal } from "../reducer/modalSlice";
 import { resetTimer } from "../reducer/dripTimerSlice";
 import { useSelector } from "../reducer/store";
 import saveImg from "../assets/save.png";
 import closeImg from "../assets/close.png";
 import plusImg from "../assets/plus.png";
 import { get, resetState, save } from "../reducer/dripDataSlice";
+import { savedDialog } from "../reducer/dialogSlice";
 
 const ModalButton: React.FC = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ const ModalButton: React.FC = () => {
 
   const dripTimes = useSelector((state) => state.dripTimer.displayTime);
 
+  const savedBeanBrand = useSelector(
+    (state) => state.dripData.dripItem.beanBrand
+  );
+
   return (
     <>
       {displayModal ? (
@@ -22,7 +27,7 @@ const ModalButton: React.FC = () => {
           <button
             className="fixed left-1/3 ml-[-2rem] bottom-5 z-30"
             onClick={() => {
-              dispatch(hidden());
+              dispatch(closeModal());
               dispatch(resetState());
               dispatch(resetTimer());
             }}
@@ -39,8 +44,9 @@ const ModalButton: React.FC = () => {
             className="fixed left-2/3 ml-[-2rem] bottom-5 z-30"
             onClick={() => {
               dispatch(save({ modalState, dripTimes }));
+              dispatch(savedDialog(savedBeanBrand));
               dispatch(get());
-              dispatch(hidden());
+              dispatch(closeModal());
               dispatch(resetState());
               dispatch(resetTimer());
             }}
@@ -57,7 +63,7 @@ const ModalButton: React.FC = () => {
       ) : (
         <button
           className="fixed left-1/2 ml-[-2rem] bottom-5 z-10"
-          onClick={() => dispatch(display("create"))}
+          onClick={() => dispatch(openModal("create"))}
         >
           <div className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#cdb5ab] text-5xl flex justify-center">
             <img

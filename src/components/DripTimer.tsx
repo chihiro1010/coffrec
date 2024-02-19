@@ -7,7 +7,7 @@ import {
 } from "../reducer/dripTimerSlice";
 import { useSelector } from "../reducer/store";
 import { useEffect } from "react";
-import timerImg from "../assets/timer.png";
+import timerImg from "../assets/timer.webp";
 import startImg from "../assets/start.png";
 import stopImg from "../assets/stop.png";
 

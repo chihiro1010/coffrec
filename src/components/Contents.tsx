@@ -1,24 +1,35 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import DripItem from "./DripItem";
 import { useDispatch } from "react-redux";
 import { useSelector } from "../reducer/store";
-import { get } from "../reducer/dripDataSlice";
-import homeLogoImg from "../assets/home.png";
+import { disableGuide, enableGuide, get } from "../reducer/dripDataSlice";
+import homeLogoImg from "../assets/home.webp";
 
 const Contents: React.FC = () => {
   const dispatch = useDispatch();
-
   const dripDataList = useSelector<DripItem[]>(
     (state) => state.dripData.retentionDataArgs
   );
+  const displayGuide = useSelector((state) => state.dripData.guide);
+
+  const getData = useCallback(() => {
+    dispatch(get());
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(get());
-  }, []);
+    getData(); // getData()の呼び出しはuseCallback内で定義されたものを使用
+  }, [getData]); // getData()が変更された場合のみ再レンダリングをトリガー
+
+  useEffect(() => {
+    // dripDataListの長さに応じてガイドを有効または無効にする
+    dripDataList.length !== 0
+      ? dispatch(enableGuide())
+      : dispatch(disableGuide());
+  }, [dispatch, dripDataList]); // dripDataListが変更された場合のみ再レンダリングをトリガー
 
   return (
     <>
-      {dripDataList.length !== 0 ? (
+      {displayGuide ? (
         <article className="flex flex-col items-center">
           {dripDataList.map((item) => (
             <DripItem key={item.createdDateTime} dripItem={item} />

@@ -13,12 +13,19 @@ const initialState: DripDataSlice = {
     dripTimes: "00:00",
   },
   countMemoLength: 0,
+  guide: false,
 };
 
 export const dripDataSlice = createSlice({
-  name: "modal",
+  name: "dripData",
   initialState,
   reducers: {
+    enableGuide: (state) => {
+      state.guide = true;
+    },
+    disableGuide: (state) => {
+      state.guide = false;
+    },
     updateBeanBrand: (state, action) => {
       state.dripItem.beanBrand = action.payload;
     },
@@ -40,6 +47,14 @@ export const dripDataSlice = createSlice({
     updateMemo: (state, action) => {
       state.dripItem.memo = action.payload;
       state.countMemoLength = action.payload.length;
+    },
+    get: (state) => {
+      const dataFromLocalStorage: string | null =
+        localStorage.getItem("dripItem");
+
+      if (dataFromLocalStorage) {
+        state.retentionDataArgs = JSON.parse(dataFromLocalStorage);
+      }
     },
     save: (state, action) => {
       const getCurrentDatetime = (): string => {
@@ -74,11 +89,10 @@ export const dripDataSlice = createSlice({
             "dripItem",
             JSON.stringify(state.retentionDataArgs)
           );
-          alert("ドリップデータを保存しました");
         } catch (error) {
           alert("データの保存に失敗ました" + error);
           alert("登録画面を閉じ、ページの再読み込みを実行します。");
-          window.location.reload();
+          location.reload();
         }
       }
       //更新モードの場合（createdDateTime:作成日時が空でない）
@@ -101,45 +115,32 @@ export const dripDataSlice = createSlice({
             }
           });
           localStorage.setItem("dripItem", JSON.stringify(updateData));
-          alert("ドリップデータを保存しました");
         } catch (error) {
           alert("データの保存に失敗ました" + error);
           alert("登録画面を閉じ、ページの再読み込みを実行します。");
-          window.location.reload();
+          location.reload();
         }
       } else {
         alert("データの保存に失敗ました。モーダルの状態が不正です。");
         alert("登録画面を閉じ、ページの再読み込みを実行します。");
-        window.location.reload();
-      }
-    },
-    get: (state) => {
-      const dataFromLocalStorage: string | null =
-        localStorage.getItem("dripItem");
-      if (dataFromLocalStorage) {
-        state.retentionDataArgs = JSON.parse(dataFromLocalStorage);
+        location.reload();
       }
     },
 
     remove: (state, action) => {
-      const result = window.confirm(
-        `『${action.payload.beanBrand}』の抽出データを削除してもよろしいですか？`
-      );
-
       try {
-        if (result) {
-          const currentData: DripItem[] = [...state.retentionDataArgs];
+        const currentData: DripItem[] = [...state.retentionDataArgs];
 
-          state.retentionDataArgs = currentData.filter(
-            (data) => data.createdDateTime !== action.payload.createdDateTime
-          );
+        console.log(action.payload);
 
-          localStorage.setItem(
-            "dripItem",
-            JSON.stringify(state.retentionDataArgs)
-          );
-          alert("対象のデータを削除しました");
-        }
+        state.retentionDataArgs = currentData.filter(
+          (data) => data.createdDateTime !== action.payload.createdDateTime
+        );
+
+        localStorage.setItem(
+          "dripItem",
+          JSON.stringify(state.retentionDataArgs)
+        );
       } catch (error) {
         alert("対象データの削除に失敗しました" + error);
       }
@@ -173,6 +174,8 @@ export const dripDataSlice = createSlice({
 });
 
 export const {
+  enableGuide,
+  disableGuide,
   updateBeanBrand,
   updateGrinding,
   updateBeanScales,

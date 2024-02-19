@@ -9,14 +9,14 @@ export const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    display: (state, action) => {
+    openModal: (state, action) => {
       state.modalState = action.payload;
       state.isDisplayed = true;
     },
-    hidden: (state) => {
+    closeModal: (state) => {
       state.isDisplayed = false;
     },
   },
 });
 
-export const { display, hidden } = modalSlice.actions;
+export const { openModal, closeModal } = modalSlice.actions;

@@ -1,10 +1,10 @@
 import DripTimer from "./DripTimer";
-import coffeeBeanImg from "../assets/coffee_bean.png";
-import particleSizeImg from "../assets/particle_size.png";
-import scalesImg from "../assets/scales.png";
-import waterImg from "../assets/water.png";
-import thermometerImg from "../assets/thermometer.png";
-import memoImg from "../assets/memo.png";
+import coffeeBeanImg from "../assets/bean.webp";
+import particleSizeImg from "../assets/particle_size.webp";
+import scalesImg from "../assets/scales.webp";
+import waterImg from "../assets/water.webp";
+import thermometerImg from "../assets/thermometer.webp";
+import memoImg from "../assets/memo.webp";
 import { useSelector } from "../reducer/store";
 import {
   updateBeanBrand,

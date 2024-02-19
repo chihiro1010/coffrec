@@ -131,8 +131,6 @@ export const dripDataSlice = createSlice({
       try {
         const currentData: DripItem[] = [...state.retentionDataArgs];
 
-        console.log(action.payload);
-
         state.retentionDataArgs = currentData.filter(
           (data) => data.createdDateTime !== action.payload.createdDateTime
         );

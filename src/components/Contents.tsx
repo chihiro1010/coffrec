@@ -7,10 +7,10 @@ import homeLogoImg from "../assets/home.webp";
 
 const Contents: React.FC = () => {
   const dispatch = useDispatch();
-  const dripDataList = useSelector<DripItem[]>(
+  const dripDataList: DripItem[] = useSelector(
     (state) => state.dripData.retentionDataArgs
   );
-  const displayGuide = useSelector((state) => state.dripData.guide);
+  const displayGuide: boolean = useSelector((state) => state.dripData.guide);
 
   const getData = useCallback(() => {
     dispatch(get());

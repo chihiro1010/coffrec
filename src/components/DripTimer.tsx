@@ -13,11 +13,14 @@ import stopImg from "../assets/stop.png";
 
 const DripTimer: React.FC = () => {
   const dispatch = useDispatch();
-  const dripState = useSelector((state) => state.dripTimer.dripping);
-  const calcTime = useSelector((state) => state.dripTimer.calcTime);
-  const displayTime = useSelector((state) => state.dripTimer.displayTime);
+  const dripState: boolean = useSelector((state) => state.dripTimer.dripping);
+  const calcTime: number = useSelector((state) => state.dripTimer.calcTime);
+  const displayTime: string = useSelector(
+    (state) => state.dripTimer.displayTime
+  );
+  const modalState: string = useSelector((state) => state.modal.modalState);
 
-  const dripTimesState = useSelector(
+  const dripTimesState: string | undefined = useSelector(
     (state) => state.dripData.dripItem.dripTimes
   );
 
@@ -32,8 +35,6 @@ const DripTimer: React.FC = () => {
     return () => clearInterval(timerId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dripState]);
-
-  const modalState = useSelector((state) => state.modal.modalState);
 
   useEffect(() => {
     dispatch(setdisplayTime());

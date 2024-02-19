@@ -3,11 +3,16 @@ import deleteImg from "../assets/delete.png";
 import { modalUpdateMode } from "../reducer/dripDataSlice";
 import { useDispatch } from "react-redux";
 
-import { openModal } from "../reducer/modalSlice";
-import { deleteDialog } from "../reducer/dialogSlice";
+import { displayModal } from "../reducer/modalSlice";
+import { displayDialog } from "../reducer/dialogSlice";
 
 const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
   const dispatch = useDispatch();
+
+  const deleteActionItem: ProcessingMaterial = {
+    dripItem,
+    processType: "delete",
+  };
 
   return (
     <>
@@ -16,7 +21,7 @@ const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
           <button
             onClick={() => {
               dispatch(modalUpdateMode(dripItem));
-              dispatch(openModal("update"));
+              dispatch(displayModal("update"));
             }}
           >
             <h3 className="absolute text-sm right-2 top-1">
@@ -31,7 +36,7 @@ const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
           </button>
           <button
             type="submit"
-            onClick={() => dispatch(deleteDialog(dripItem))}
+            onClick={() => dispatch(displayDialog(deleteActionItem))}
             className="absolute right-2 bottom-1 text-right"
           >
             <img src={deleteImg} alt="削除ボタン" className="h-4 w-4" />

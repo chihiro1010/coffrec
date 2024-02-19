@@ -6,9 +6,8 @@ interface ModalSlice {
 interface DialogSlice {
   isDisplayed: boolean;
   isConfirmed: boolean;
-  deleteItem: DripItem;
-  savedItem: string;
-  dialogType: string;
+  processItem: DripItem;
+  processType: string;
 }
 
 interface DripDataSlice {
@@ -39,4 +38,9 @@ interface DripItem {
 interface DripItemProps {
   beanBrand?: string;
   dripItem: DripItem;
+}
+
+interface ProcessingMaterial {
+  dripItem: DripItem;
+  processType: string;
 }

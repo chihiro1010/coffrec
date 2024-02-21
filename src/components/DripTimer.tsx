@@ -54,7 +54,7 @@ const DripTimer: React.FC = () => {
           <>
             {dripState ? (
               <button
-                className="inline-block text-white bg-[#C8A99C] rounded-3xl drop-shadow-md w-28 py-2 ml-3"
+                className="inline-block text-white bg-main rounded-3xl drop-shadow-md w-28 py-2 ml-3"
                 onClick={() => dispatch(stopTimer())}
               >
                 <img
@@ -66,7 +66,7 @@ const DripTimer: React.FC = () => {
               </button>
             ) : (
               <button
-                className="inline-block text-white bg-[#C8A99C] rounded-3xl drop-shadow-md w-28 py-2 ml-3"
+                className="inline-block text-white bg-main rounded-3xl drop-shadow-md w-28 py-2 ml-3"
                 onClick={() => dispatch(startTimer())}
               >
                 <img
@@ -77,12 +77,12 @@ const DripTimer: React.FC = () => {
                 抽出開始
               </button>
             )}
-            <div className="inline-block text-3xl text-[#C8A99C] font-bold ml-10 h-10 align-middle">
+            <div className="inline-block text-3xl text-main font-bold ml-10 h-10 align-middle">
               {displayTime}
             </div>
           </>
         ) : (
-          <div className="inline-block text-3xl text-[#C8A99C] font-bold ml-10 h-10 align-middle">
+          <div className="inline-block text-3xl text-main font-bold ml-10 h-10 align-middle">
             {dripTimesState}
           </div>
         )}

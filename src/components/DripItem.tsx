@@ -17,7 +17,7 @@ const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
   return (
     <>
       <section className="relative">
-        <div className="relative text-[#C8A99C] shadow-sm rounded-md w-[22rem] text-left py-3 px-3 my-2 border-l-8 border-[#C8A99C]">
+        <div className="relative text-main shadow-sm rounded-md w-[22rem] text-left py-3 px-3 my-2 border-l-8 border-main">
           <button
             onClick={() => {
               dispatch(modalUpdateMode(dripItem));

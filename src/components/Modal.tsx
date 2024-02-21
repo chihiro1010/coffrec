@@ -45,8 +45,8 @@ const Modal: React.FC = () => {
   return (
     <>
       {displayModal ? (
-        <div className="fixed top-0 bg-white rounded-t-2xl shadow-lg w-screen h-screen z-20">
-          <div className="flex justify-center text-[#C8A99C]">
+        <div className="fixed top-0 inset-0 mx-auto mt-3 shadow-lg-top bg-white rounded-t-3xl w-[22rem] h-screen z-20 animate-slide-top">
+          <div className="flex justify-center text-[#c8a99ca2]">
             <div>
               {modalState === "update" ? (
                 <p className="fixed text-sm right-2">
@@ -132,7 +132,7 @@ const Modal: React.FC = () => {
                       dispatch(updateWaterScales(e.target.valueAsNumber))
                     }
                     placeholder="湯量"
-                    className="rounded-md drop-shadow-md  appearance-none w-16 p-2 ml-3 focus:ring-2 focus:ring-[#C8A99C]"
+                    className="rounded-md drop-shadow-md  appearance-none w-16 p-2 ml-3 focus:ring-2 focus:ring-main"
                   />
                   <div className="inline-block ml-2">ml</div>
                 </div>

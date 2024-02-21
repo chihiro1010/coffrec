@@ -19,7 +19,7 @@ const Contents: React.FC = () => {
     <>
       {dripDataList.length === 0 ? (
         <div className="flex flex-col items-center h-[90vh] justify-center mt-[-10vh]">
-          <h1 className="text-[#C8A99C] text-lg">最初の一杯を淹れましょう。</h1>
+          <h1 className="text-main text-lg">最初の一杯を淹れましょう。</h1>
           <img className="w-20 x-20 mt-5" src={homeLogoImg} alt="home-logo" />
         </div>
       ) : (

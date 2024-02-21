@@ -27,55 +27,59 @@ const ModalButton: React.FC = () => {
     <>
       {isDisplayModal ? (
         <>
-          <button
-            className="fixed left-1/3 ml-[-2rem] bottom-5 z-30"
-            onClick={() => {
-              dispatch(closeModal());
-              dispatch(resetState());
-              dispatch(resetTimer());
-            }}
-          >
-            <div className="rounded-full bg-[#999999] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#888888] text-5xl flex justify-center">
-              <img
-                src={closeImg}
-                alt="閉じるアイコン"
-                className="inline-block h-7 w-7 mt-[0.9rem]"
-              />
-            </div>
-          </button>
-          <button
-            className="fixed left-2/3 ml-[-2rem] bottom-5 z-30"
-            onClick={() => {
-              dispatch(save({ modalState, dripTimes }));
-              dispatch(displayDialog(saveActionItem));
-              dispatch(get());
-              dispatch(closeModal());
-              dispatch(resetState());
-              dispatch(resetTimer());
-            }}
-          >
-            <div className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#d2b5a7] text-5xl flex justify-center">
-              <img
-                src={saveImg}
-                alt="保存アイコン"
-                className="inline-block h-7 w-7 mt-[0.9rem]"
-              />
-            </div>
-          </button>
+          <div className="fixed inset-0 mx-auto w-[23rem] h-screen z-30">
+            <button
+              className="absolute left-1/4 bottom-24 ml-[-2rem] "
+              onClick={() => {
+                dispatch(closeModal());
+                dispatch(resetState());
+                dispatch(resetTimer());
+              }}
+            >
+              <div className="rounded-full bg-[#999999] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#888888] text-5xl flex justify-center">
+                <img
+                  src={closeImg}
+                  alt="閉じるアイコン"
+                  className="inline-block h-7 w-7 mt-[0.9rem]"
+                />
+              </div>
+            </button>
+            <button
+              className="absolute right-1/4 translate-x-1/2 bottom-24 ml-[-2rem]"
+              onClick={() => {
+                dispatch(save({ modalState, dripTimes }));
+                dispatch(displayDialog(saveActionItem));
+                dispatch(get());
+                dispatch(closeModal());
+                dispatch(resetState());
+                dispatch(resetTimer());
+              }}
+            >
+              <div className="rounded-full bg-main h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#d2b5a7] text-5xl flex justify-center">
+                <img
+                  src={saveImg}
+                  alt="保存アイコン"
+                  className="inline-block h-7 w-7 mt-[0.9rem]"
+                />
+              </div>
+            </button>
+          </div>
         </>
       ) : (
-        <button
-          className="fixed left-1/2 ml-[-2rem] bottom-5 z-10"
-          onClick={() => dispatch(displayModal("create"))}
-        >
-          <div className="rounded-full bg-[#C8A99C] h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#cdb5ab] text-5xl flex justify-center">
-            <img
-              src={plusImg}
-              alt="追加アイコン"
-              className="inline-block h-9 w-9 mt-[0.7rem]"
-            />
-          </div>
-        </button>
+        <div className="fixed inset-0 mx-auto w-[23rem] h-screen">
+          <button
+            className="absolute right-1/2 translate-x-1/2 bottom-24 z-10"
+            onClick={() => dispatch(displayModal("create"))}
+          >
+            <div className="rounded-full bg-main h-16 w-16 pt-[0.2rem] font-bold text-white shadow-sm hover:bg-[#cdb5ab] text-5xl flex justify-center">
+              <img
+                src={plusImg}
+                alt="追加アイコン"
+                className="inline-block h-9 w-9 mt-[0.7rem]"
+              />
+            </div>
+          </button>
+        </div>
       )}
     </>
   );

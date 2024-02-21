@@ -27,9 +27,9 @@ const ModalButton: React.FC = () => {
     <>
       {isDisplayModal ? (
         <>
-          <div className="fixed inset-0 mx-auto w-[23rem] h-screen z-30">
+          <div className="relative mx-auto w-[23rem] h-screen">
             <button
-              className="absolute left-1/4 bottom-24 ml-[-2rem] "
+              className="absolute left-1/4 bottom-24 ml-[-2rem] z-30"
               onClick={() => {
                 dispatch(closeModal());
                 dispatch(resetState());
@@ -45,7 +45,7 @@ const ModalButton: React.FC = () => {
               </div>
             </button>
             <button
-              className="absolute right-1/4 translate-x-1/2 bottom-24 ml-[-2rem]"
+              className="absolute right-1/4 translate-x-1/2 bottom-24 ml-[-2rem] z-30"
               onClick={() => {
                 dispatch(save({ modalState, dripTimes }));
                 dispatch(displayDialog(saveActionItem));

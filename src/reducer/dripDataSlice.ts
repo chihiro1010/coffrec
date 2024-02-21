@@ -13,19 +13,12 @@ const initialState: DripDataSlice = {
     dripTimes: "00:00",
   },
   countMemoLength: 0,
-  guide: false,
 };
 
 export const dripDataSlice = createSlice({
   name: "dripData",
   initialState,
   reducers: {
-    enableGuide: (state) => {
-      state.guide = true;
-    },
-    disableGuide: (state) => {
-      state.guide = false;
-    },
     updateBeanBrand: (state, action) => {
       state.dripItem.beanBrand = action.payload;
     },
@@ -172,8 +165,6 @@ export const dripDataSlice = createSlice({
 });
 
 export const {
-  enableGuide,
-  disableGuide,
   updateBeanBrand,
   updateGrinding,
   updateBeanScales,

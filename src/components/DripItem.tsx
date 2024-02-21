@@ -11,7 +11,7 @@ const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
 
   const deleteActionItem: ProcessingMaterial = {
     dripItem,
-    processType: "delete",
+    actionType: "delete",
   };
 
   return (

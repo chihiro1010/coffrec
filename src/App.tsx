@@ -1,8 +1,8 @@
 import Contents from "./components/Contents";
+import Dialog from "./components/Dialog/Dialog";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import ModalButton from "./components/ModalButton";
-import Dialog from "./components/Dialog";
 
 function App() {
   return (
@@ -12,7 +12,7 @@ function App() {
         <ModalButton />
         <Contents />
         <Modal />
-        <Dialog></Dialog>
+        <Dialog />
       </main>
     </>
   );

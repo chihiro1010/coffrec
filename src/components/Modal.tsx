@@ -33,11 +33,9 @@ const Modal: React.FC = () => {
   );
   const celsiusState = useSelector((state) => state.dripData.dripItem.celsius);
   const memoState = useSelector((state) => state.dripData.dripItem.memo);
-
   const memoLengthState = useSelector(
     (state) => state.dripData.countMemoLength
   );
-
   const modalState = useSelector((state) => state.modal.modalState);
   const createdDateTime = useSelector(
     (state) => state.dripData.dripItem.createdDateTime

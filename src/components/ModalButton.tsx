@@ -20,7 +20,7 @@ const ModalButton: React.FC = () => {
 
   const saveActionItem: ProcessingMaterial = {
     dripItem,
-    processType: "save",
+    actionType: "save",
   };
 
   return (

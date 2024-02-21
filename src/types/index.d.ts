@@ -7,14 +7,13 @@ interface DialogSlice {
   isDisplayed: boolean;
   isConfirmed: boolean;
   processItem: DripItem;
-  processType: string;
+  actionType: string;
 }
 
 interface DripDataSlice {
   retentionDataArgs: DripItem[];
   countMemoLength: number;
   dripItem: DripItem;
-  guide: boolean;
 }
 
 interface DripTimerSlice {
@@ -42,5 +41,11 @@ interface DripItemProps {
 
 interface ProcessingMaterial {
   dripItem: DripItem;
-  processType: string;
+  actionType: string;
+}
+
+interface DialogProps {
+  actionButtonText?: string;
+  message: string;
+  onClickAction?: function;
 }

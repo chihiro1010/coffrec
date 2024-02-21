@@ -4,7 +4,7 @@ const initialState: DialogSlice = {
   isDisplayed: false,
   isConfirmed: false,
   processItem: { createdDateTime: "" },
-  processType: "",
+  actionType: "",
 };
 
 export const dialogSlice = createSlice({
@@ -12,21 +12,20 @@ export const dialogSlice = createSlice({
   initialState,
   reducers: {
     displayDialog: (state, action) => {
-      state.processType = action.payload.processType;
+      state.actionType = action.payload.actionType;
       state.processItem = action.payload.dripItem;
       state.isDisplayed = true;
     },
+
     closeDialog: (state) => {
       state.isDisplayed = false;
+      state.actionType = "";
     },
-    displayAlert: (state) => {
-      state.isConfirmed = true;
-    },
-    closeAlert: (state) => {
-      state.isConfirmed = false;
+    proceedConfirm: (state) => {
+      state.isDisplayed = false;
     },
   },
 });
 
-export const { displayDialog, closeDialog, displayAlert, closeAlert } =
+export const { displayDialog, closeDialog, proceedConfirm } =
   dialogSlice.actions;

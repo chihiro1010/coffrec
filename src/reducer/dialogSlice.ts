@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: DialogSlice = {
-  isDisplayed: false,
-  isConfirmed: false,
+  isMessageDialogDisplay: false,
+  isActionDialogDisplay: false,
   processItem: { createdDateTime: "" },
   actionType: "",
 };
@@ -11,21 +11,37 @@ export const dialogSlice = createSlice({
   name: "dialog",
   initialState,
   reducers: {
-    displayDialog: (state, action) => {
+    displayActionDialog: (state, action) => {
       state.actionType = action.payload.actionType;
       state.processItem = action.payload.dripItem;
-      state.isDisplayed = true;
+      state.isActionDialogDisplay = true;
+    },
+    displayMessageDialog: (state, action) => {
+      state.actionType = action.payload.actionType;
+      state.processItem = action.payload.dripItem;
+      state.isMessageDialogDisplay = true;
     },
 
-    closeDialog: (state) => {
-      state.isDisplayed = false;
+    closeMessageDialog: (state) => {
+      state.isMessageDialogDisplay = false;
       state.actionType = "";
     },
+    closeActionDialog: (state) => {
+      state.isActionDialogDisplay = false;
+      state.actionType = "";
+    },
+
     proceedConfirm: (state) => {
-      state.isDisplayed = false;
+      state.isActionDialogDisplay = false;
+      state.isMessageDialogDisplay = true;
     },
   },
 });
 
-export const { displayDialog, closeDialog, proceedConfirm } =
-  dialogSlice.actions;
+export const {
+  displayActionDialog,
+  displayMessageDialog,
+  closeMessageDialog,
+  closeActionDialog,
+  proceedConfirm,
+} = dialogSlice.actions;

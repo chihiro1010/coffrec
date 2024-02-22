@@ -4,7 +4,7 @@ import { modalUpdateMode } from "../reducer/dripDataSlice";
 import { useDispatch } from "react-redux";
 
 import { displayModal } from "../reducer/modalSlice";
-import { displayDialog } from "../reducer/dialogSlice";
+import { displayActionDialog } from "../reducer/dialogSlice";
 
 const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
   const dispatch = useDispatch();
@@ -36,7 +36,7 @@ const DripItem: React.FC<DripItemProps> = ({ dripItem }) => {
           </button>
           <button
             type="submit"
-            onClick={() => dispatch(displayDialog(deleteActionItem))}
+            onClick={() => dispatch(displayActionDialog(deleteActionItem))}
             className="absolute right-2 bottom-1 text-right"
           >
             <img src={deleteImg} alt="削除ボタン" className="h-4 w-4" />

@@ -1,11 +1,11 @@
 interface ModalSlice {
-  isDisplayed: boolean;
+  isDisplay: boolean;
   modalState: string;
 }
 
 interface DialogSlice {
-  isDisplayed: boolean;
-  isConfirmed: boolean;
+  isMessageDialogDisplay: boolean;
+  isActionDialogDisplay: boolean;
   processItem: DripItem;
   actionType: string;
 }
@@ -48,4 +48,5 @@ interface DialogProps {
   actionButtonText?: string;
   message: string;
   onClickAction?: function;
+  actionType: string;
 }

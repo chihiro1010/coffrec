@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: ModalSlice = {
-  isDisplayed: false,
+  isDisplay: false,
   modalState: "none",
 };
 
@@ -11,10 +11,10 @@ export const modalSlice = createSlice({
   reducers: {
     displayModal: (state, action) => {
       state.modalState = action.payload;
-      state.isDisplayed = true;
+      state.isDisplay = true;
     },
     closeModal: (state) => {
-      state.isDisplayed = false;
+      state.isDisplay = false;
     },
   },
 });

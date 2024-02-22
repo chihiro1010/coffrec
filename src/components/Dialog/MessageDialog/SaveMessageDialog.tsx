@@ -5,13 +5,12 @@ const SaveMessageDialog = () => {
   const processItem: DripItem = useSelector(
     (state) => state.dialog.processItem
   );
-  const actionType: string = useSelector((state) => state.dialog.actionType);
-  const display: boolean = useSelector((state) => state.dialog.isDisplayed);
 
-  return actionType === "save" && display ? (
+  return (
     <MessageDialog
       message={`『${processItem.beanBrand}』の抽出データを保存しました。`}
+      actionType="save"
     />
-  ) : null;
+  );
 };
 export default SaveMessageDialog;

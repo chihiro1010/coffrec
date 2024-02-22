@@ -10,10 +10,8 @@ const DeleteActionDialog = () => {
   const processItem: DripItem = useSelector(
     (state) => state.dialog.processItem
   );
-  const actionType: string = useSelector((state) => state.dialog.actionType);
-  const display: boolean = useSelector((state) => state.dialog.isDisplayed);
 
-  return actionType === "delete" && display ? (
+  return (
     <ActionDialog
       actionButtonText="削除"
       message={`『${processItem.beanBrand}』の抽出データを削除します。よろしいですか？`}
@@ -21,7 +19,8 @@ const DeleteActionDialog = () => {
         dispatch(remove(processItem));
         dispatch(proceedConfirm());
       }}
+      actionType={"delete"}
     />
-  ) : null;
+  );
 };
 export default DeleteActionDialog;

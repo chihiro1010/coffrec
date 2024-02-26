@@ -6,7 +6,7 @@ import { useSelector } from "../reducer/store";
 import saveImg from "../assets/save.png";
 import closeImg from "../assets/close.png";
 import plusImg from "../assets/plus.png";
-import { get, resetState, save } from "../reducer/dripDataSlice";
+import { resetState, save } from "../reducer/dripDataSlice";
 import { displayMessageDialog } from "../reducer/dialogSlice";
 import { CSSTransition } from "react-transition-group";
 
@@ -65,7 +65,6 @@ const ModalButton: React.FC = () => {
             onClick={() => {
               dispatch(save({ modalState, dripTimes }));
               dispatch(displayMessageDialog(saveActionItem));
-              dispatch(get());
               dispatch(closeModal());
               dispatch(resetState());
               dispatch(resetTimer());

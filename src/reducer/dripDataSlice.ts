@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { db } from "../db";
 
 const initialState: DripDataSlice = {
   retentionDataArgs: [],
@@ -15,6 +16,16 @@ const initialState: DripDataSlice = {
   countMemoLength: 0,
 };
 
+async function addData(data: DripItem) {
+  await db.dripItems.add(data);
+}
+async function updateData(data: DripItem) {
+  await db.dripItems.put(data);
+}
+async function deleteData(key: string) {
+  const id = await db.dripItems.delete(key);
+  return id;
+}
 export const dripDataSlice = createSlice({
   name: "dripData",
   initialState,
@@ -41,13 +52,8 @@ export const dripDataSlice = createSlice({
       state.dripItem.memo = action.payload;
       state.countMemoLength = action.payload.length;
     },
-    get: (state) => {
-      const dataFromLocalStorage: string | null =
-        localStorage.getItem("dripItem");
-
-      if (dataFromLocalStorage) {
-        state.retentionDataArgs = JSON.parse(dataFromLocalStorage);
-      }
+    get: (state, action) => {
+      state.retentionDataArgs = action.payload;
     },
     save: (state, action) => {
       const getCurrentDatetime = (): string => {
@@ -63,6 +69,7 @@ export const dripDataSlice = createSlice({
         const formattedTime: string = `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
         return formattedTime;
       };
+
       //新規作成モードの場合
       if (action.payload.modalState === "create") {
         const registData: DripItem = {
@@ -75,39 +82,28 @@ export const dripDataSlice = createSlice({
           celsius: state.dripItem.celsius,
           memo: state.dripItem.memo,
         };
-
         try {
-          state.retentionDataArgs.push(registData);
-          localStorage.setItem(
-            "dripItem",
-            JSON.stringify(state.retentionDataArgs)
-          );
+          addData(registData);
         } catch (error) {
           alert("データの保存に失敗ました" + error);
           alert("登録画面を閉じ、ページの再読み込みを実行します。");
           location.reload();
         }
       }
-      //更新モードの場合（createdDateTime:作成日時が空でない）
+      //更新モードの場合
       else if (action.payload.modalState === "update") {
+        const updateDataItem: DripItem = {
+          createdDateTime: state.dripItem.createdDateTime,
+          dripTimes: state.dripItem.dripTimes,
+          beanBrand: state.dripItem.beanBrand,
+          grinding: state.dripItem.grinding,
+          beanScales: state.dripItem.beanScales,
+          waterScales: state.dripItem.waterScales,
+          celsius: state.dripItem.celsius,
+          memo: state.dripItem.memo,
+        };
         try {
-          const currentData: DripItem[] = [...state.retentionDataArgs];
-          const updateData: DripItem[] = currentData.map((data) => {
-            if (data.createdDateTime === state.dripItem.createdDateTime) {
-              return {
-                ...data,
-                beanBrand: state.dripItem.beanBrand,
-                grinding: state.dripItem.grinding,
-                beanScales: state.dripItem.beanScales,
-                waterScales: state.dripItem.waterScales,
-                celsius: state.dripItem.celsius,
-                memo: state.dripItem.memo,
-              };
-            } else {
-              return { ...data };
-            }
-          });
-          localStorage.setItem("dripItem", JSON.stringify(updateData));
+          updateData(updateDataItem);
         } catch (error) {
           alert("データの保存に失敗ました" + error);
           alert("登録画面を閉じ、ページの再読み込みを実行します。");
@@ -122,16 +118,7 @@ export const dripDataSlice = createSlice({
 
     remove: (state, action) => {
       try {
-        const currentData: DripItem[] = [...state.retentionDataArgs];
-
-        state.retentionDataArgs = currentData.filter(
-          (data) => data.createdDateTime !== action.payload.createdDateTime
-        );
-
-        localStorage.setItem(
-          "dripItem",
-          JSON.stringify(state.retentionDataArgs)
-        );
+        deleteData(action.payload.createdDateTime);
       } catch (error) {
         alert("対象データの削除に失敗しました" + error);
       }

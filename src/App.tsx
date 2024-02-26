@@ -1,5 +1,5 @@
 import Contents from "./components/Contents";
-import Dialog from "./components/Dialog/Dialog";
+import RootDialog from "./components/Dialog/RootDialog";
 import Header from "./components/Header";
 import Modal from "./components/Modal";
 import ModalButton from "./components/ModalButton";
@@ -12,7 +12,7 @@ function App() {
         <ModalButton />
         <Contents />
         <Modal />
-        <Dialog />
+        <RootDialog />
       </main>
     </>
   );

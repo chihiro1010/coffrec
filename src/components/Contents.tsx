@@ -4,16 +4,24 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "../reducer/store";
 import { get } from "../reducer/dripDataSlice";
 import homeLogoImg from "../assets/home.webp";
+import { db } from "../db";
 
 const Contents: React.FC = () => {
   const dispatch = useDispatch();
   const dripDataList: DripItem[] = useSelector(
     (state) => state.dripData.retentionDataArgs
   );
+  const isDialogClosed: boolean = useSelector(
+    (state) => state.dialog.isMessageDialogDisplay
+  );
+  const getData = async () => {
+    const items = await db.dripItems.toArray();
+    dispatch(get(items));
+  };
 
   useEffect(() => {
-    dispatch(get());
-  }, []);
+    getData();
+  }, [isDialogClosed]);
 
   return (
     <>

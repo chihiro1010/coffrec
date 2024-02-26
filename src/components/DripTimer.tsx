@@ -28,7 +28,7 @@ const DripTimer: React.FC = () => {
     let timerId: number | undefined = undefined;
 
     if (dripState) {
-      timerId = setInterval(() => {
+      timerId = window.setInterval(() => {
         dispatch(setcalcTime());
       }, 1000);
     }
